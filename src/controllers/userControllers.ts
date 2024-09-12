@@ -24,28 +24,33 @@ export const userLogIn = async (req: Request, res: Response) => {
   }
 
   const userWithEmail = await prisma.user.findUnique({
-    where : { email},
-  })
-  
-  if (userWithEmail) {
-    const passwordCheck = password == userWithEmail.password ? res.json( `Welcome. Log In Successful`) : res.json(`Password or email incorrect,please try again`)
+    where: { email},
+  });
 
-    return passwordCheck
+  if (userWithEmail) {
+    const passwordCheck =
+      password == userWithEmail.password
+        ? res.json(`Welcome. Log In Successful`)
+        : res.json(`Password or email incorrect,please try again`);
+
+    return passwordCheck;
   }
 
-const users = await prisma.user.findMany()
+  const users = await prisma.user.findMany();
 
-const userWithPassword = users.find(user => user.password === password)
+  const userWithUsername = users.find((user) => user.username === username);
 
-
-if (userWithPassword.username == username ) {
+  if (!userWithUsername) {
     return res.json({
-        message :`Password incorrect `
-    })
-}
+      message: `Username Incorrect. Please try again`,
+    });
+  }
 
-return 
+  if (userWithUsername.password === password) {
+    return res.json({
+      message: `Password incorrect `,
+    });
+  }
 
-
-
-}
+  return res.status(200).json(`Welcome. Log In Successful`);
+};

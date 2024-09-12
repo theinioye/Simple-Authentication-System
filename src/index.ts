@@ -1,16 +1,16 @@
 import express,{Express,Request,Response}  from "express"
 import dotenv from "dotenv"
 import bodyParser from "body-parser"
-import userRouter from 
+import userRouter from "./routes/userRoutes"
 
 dotenv.config()
 
 const app : Express  = express()
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 4000
 
 
 app.use(bodyParser.json())
-app.use(`/api/user`, userRouter)
+app.use(`/api/`, userRouter)
 
 
 
