@@ -9,4 +9,4 @@ userRouter.post("/users",validateData(userSignUpSchema), createUser)
 userRouter.post("/users/logIn", validateData(userLogInSchema), userLogIn)
 
 
-export default userRouter
+export default userRouter 

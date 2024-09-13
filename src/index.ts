@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import bodyParser from "body-parser"
 import userRouter from "./routes/userRoutes"
 
+
 dotenv.config()
 
 const app : Express  = express()
