@@ -18,7 +18,6 @@ export const validateData =
     req.body = result.data;
     next();
   };
-
 export const authenticateToken = (
   req: Request,
   res: Response,
